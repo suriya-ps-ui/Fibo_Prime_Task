@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlTypes;
+using System.Linq.Expressions;
+using System.Net.Http.Headers;
 class Program{
     //Method to find fibo number
     public static int fibo(int num){
@@ -58,10 +61,19 @@ class Program{
         }
         return primes;
     }
+    public static int validate(){
+        Console.WriteLine("Enter  length for Prime Numbers:");
+        retry:
+        try{
+            return Convert.ToInt32(Console.ReadLine()); 
+        }catch(Exception ex){
+            System.Console.WriteLine("Enter integer number:"+ex.Message);
+            goto retry;
+        }
+    }
     static void Main(string[] args){
         int primeLen;
-        Console.WriteLine("Enter  length for Prime Numbers:");
-        primeLen=Convert.ToInt32(Console.ReadLine());//Getting n number of prime numbers
+        primeLen=validate();//Getting n number of prime numbers
         List<int> primes=primeForLength(primeLen);
         int[] fibArray=primes.ToArray();//Converting list to an array
         //Converting prime numbers to its respective fibo number
